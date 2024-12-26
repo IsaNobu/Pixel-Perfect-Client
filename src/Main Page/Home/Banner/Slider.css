@@ -1,0 +1,63 @@
+/* --- Make Arrow Animate --- */
+@keyframes moveRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-13px);
+    color: rgb(151, 151, 151);
+  }
+}
+@keyframes moveLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(13px);
+    color: rgb(151, 151, 151);
+  }
+}
+
+.slider-left :hover {
+  animation: moveRight 0.3s ease-in-out forwards;
+}
+.slider-right :hover {
+  animation: moveLeft 0.3s ease-in-out forwards;
+}
+
+/* transition*/
+
+.item :nth-child(1) {
+  z-index: 1;
+}
+
+.item :nth-child(1) .title,
+.item :nth-child(1) .photo {
+  transform: translateY(50px);
+  filter: blur(10px);
+  opacity: 0;
+  animation: showContent 0.3s 1s linear forwards;
+}
+
+@keyframes showContent {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* --- Arrow for smaller devices --- */
+
+.buttons:nth-child(1) .button {
+  width: 8px;
+  height: 8px;
+  animation: active 0.2s linear forwards;
+}
+
+@keyframes active {
+  to {
+    width: 12px;
+    height: 12px;
+  }
+}
