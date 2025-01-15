@@ -1,6 +1,9 @@
 import Headroom from "react-headroom";
 import { Link, NavLink } from "react-router-dom";
 import { FaDollarSign } from "react-icons/fa";
+
+import "../Components/DropDown.css";
+
 const NavBar = () => {
   const Links = (
     <>
@@ -21,11 +24,20 @@ const NavBar = () => {
       </li>
       <li>
         <Link>
-          <img
-            className="w-[50px] h-[50px]"
-            src="https://i.ibb.co.com/yBr5F0C/profile-picture-portrait.png"
-            alt=""
-          />
+          <div className="customDropdown">
+            <button className="customDropbtn">
+              <img
+                className="w-[50px] h-[50px]"
+                src="https://i.ibb.co.com/yBr5F0C/profile-picture-portrait.png"
+                alt=""
+              />
+            </button>
+            <div className="custom-dropdown-content">
+              <Link to={"/login-page"}>Login</Link>
+              <a href="#">Link 2</a>
+              <a href="#">Link 3</a>
+            </div>
+          </div>
         </Link>
       </li>
     </>
