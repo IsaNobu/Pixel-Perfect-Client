@@ -29,7 +29,7 @@ const Banner = () => {
         return setCurrentDivIndex(0);
       }
       setCurrentDivIndex((prevIndex) => prevIndex + 1);
-    }, 20000);
+    }, 2000000);
     return () => clearInterval(intervalId);
   }, [currentDivIndex]);
   return (
