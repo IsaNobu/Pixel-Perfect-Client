@@ -1,10 +1,21 @@
 import Headroom from "react-headroom";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaDollarSign } from "react-icons/fa";
 
 import "../Components/DropDown.css";
+import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../Auth Provider/AuthContext";
+import { useContext } from "react";
 
 const NavBar = () => {
+  const { logOut, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut().then(() => {
+      navigate("/");
+    });
+  };
   const Links = (
     <>
       <li className="text-[#929292]">
@@ -23,27 +34,34 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
-        <Link>
-          <div className="customDropdown">
-            <button className="customDropbtn">
-              <img
-                className="w-[50px] h-[50px]"
-                src="https://i.ibb.co.com/yBr5F0C/profile-picture-portrait.png"
-                alt=""
-              />
-            </button>
-            <div className="custom-dropdown-content">
-              <Link to={"/login-page"}>Login</Link>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
+        <div className="customDropdown">
+          <button className="customDropbtn">
+            <img
+              className="w-[50px] h-[50px]"
+              src="https://i.ibb.co.com/yBr5F0C/profile-picture-portrait.png"
+              alt=""
+            />
+          </button>
+          <div className="custom-dropdown-content">
+            {user ? (
+              <>
+                <a onClick={handleLogOut}>Log Out</a>
+              </>
+            ) : (
+              <>
+                <Link to={"/login-page"}>Login</Link>
+              </>
+            )}
           </div>
-        </Link>
+        </div>
       </li>
     </>
   );
   return (
     <div className="z-50">
+      <Helmet>
+        <title>Login Page</title>
+      </Helmet>
       <Headroom>
         <div className="navbar bg-transparent">
           <div className="navbar-start mt-[30px]">
