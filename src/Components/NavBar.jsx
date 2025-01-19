@@ -1,8 +1,6 @@
 import Headroom from "react-headroom";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaDollarSign } from "react-icons/fa";
-
-import "../Components/DropDown.css";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../Auth Provider/AuthContext";
 import { useContext } from "react";
@@ -34,26 +32,52 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
-        <div className="customDropdown">
-          <button className="customDropbtn">
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="rounded-full">
             <img
               className="w-[50px] h-[50px]"
               src="https://i.ibb.co.com/yBr5F0C/profile-picture-portrait.png"
               alt=""
             />
-          </button>
-          <div className="custom-dropdown-content">
-            {user ? (
-              <>
-                <a onClick={handleLogOut}>Log Out</a>
-              </>
-            ) : (
-              <>
-                <Link to={"/login-page"}>Login</Link>
-              </>
-            )}
           </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+          >
+            <li>
+              {user ? (
+                <>
+                  <a onClick={handleLogOut}>Log Out</a>
+                </>
+              ) : (
+                <>
+                  <Link to={"/login-page"}>Login</Link>
+                </>
+              )}
+            </li>
+            <li>
+              <a>Item 2</a>
+            </li>
+          </ul>
         </div>
+      </li>
+    </>
+  );
+  const mobileLinks = (
+    <>
+      <li>
+        <Link to={"/"}>Home</Link>
+      </li>
+      <li>
+        {user ? (
+          <>
+            <a onClick={handleLogOut}>Log Out</a>
+          </>
+        ) : (
+          <>
+            <Link to={"/login-page"}>Login</Link>
+          </>
+        )}
       </li>
     </>
   );
@@ -63,56 +87,50 @@ const NavBar = () => {
         <title>Login Page</title>
       </Helmet>
       <Headroom>
-        <div className="navbar bg-transparent">
-          <div className="navbar-start mt-[30px]">
-            <div className="dropdown">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost lg:hidden"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+        <div className="navbar bg-white w-full">
+          <div className="lg:navbar-start mt-[30px]">
+            <div className="drawer lg:hidden">
+              <input
+                id="my-drawer-2"
+                type="checkbox"
+                className="drawer-toggle"
+              />
+              <div className="drawer-content flex flex-col items-center justify-center">
+                <label
+                  htmlFor="my-drawer-2"
+                  className="drawer-button lg:hidden"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h8m-8 6h16"
+                    />
+                  </svg>
+                </label>
               </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-white rounded-box z-50 mt-3 w-52 p-2"
-              >
-                <li>
-                  <a>Item 1</a>
-                </li>
-                <li>
-                  <a>Parent</a>
-                  <ul className="p-2">
-                    <li>
-                      <a>Rovaiza</a>
-                    </li>
-                    <li>
-                      <a>Submenu 2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a>Item 3</a>
-                </li>
-              </ul>
+              <div className="drawer-side z-50">
+                <label
+                  htmlFor="my-drawer-2"
+                  aria-label="close sidebar"
+                  className="drawer-overlay"
+                ></label>
+                <ul className=" bg-white text-base-content min-h-full w-80 p-4">
+                  {mobileLinks}
+                </ul>
+              </div>
             </div>
-            <a className="text-2xl font-bold ml-6 lg:block hidden">
+            <Link to={"/"} className="text-2xl font-bold ml-6">
               <span className="mr-2">P I X E L </span>
               <span>P E R F E C T</span>
-            </a>
+            </Link>
           </div>
           <div className="navbar-end hidden lg:flex">
             <ul className="menu-horizontal mr-6 gap-12 font-semibold items-center">

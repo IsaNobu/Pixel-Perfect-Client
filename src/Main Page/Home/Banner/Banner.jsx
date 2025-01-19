@@ -37,7 +37,7 @@ const Banner = () => {
       <section className="lg:w-[1903px] lg:h-[705px] h-[500px] bg-[#F3F3F3] overflow-hidden relative">
         <div
           className={` left-0 right-0 mx-auto item lg:top-[25%] md:top-[5%]
-        ${currentDivIndex === 0 ? "absolute" : "hidden"}
+        ${currentDivIndex === 0 ? "absolute" : "hidden"} z-0
           `}
         >
           <div className="flex flex-col md:flex-row justify-center lg:gap-[253px] md:gap-0 gap-8 items-center">
@@ -62,7 +62,7 @@ const Banner = () => {
         </div>
         <div
           className={` left-0 right-0 mx-auto item lg:top-[25%] md:top-[15%]
-        ${currentDivIndex === 1 ? "absolute" : "hidden"}
+        ${currentDivIndex === 1 ? "absolute" : "hidden"} z-0
           `}
         >
           <div className="flex md:flex-row flex-col justify-center lg:gap-96 md:gap-[00px] gap-8 items-center">
@@ -87,7 +87,7 @@ const Banner = () => {
         </div>
         <div
           className={` left-0 right-0 mx-auto item lg:top-0 md:top-[20%]
-        ${currentDivIndex === 2 ? "absolute" : "hidden"}
+        ${currentDivIndex === 2 ? "absolute" : "hidden"} z-0
           `}
         >
           <div className="flex flex-col md:flex-row justify-center lg:gap-[330px] md:gap-12 items-center">
