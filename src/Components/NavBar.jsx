@@ -14,31 +14,56 @@ const NavBar = () => {
       navigate("/");
     });
   };
+
   const Links = (
     <>
       <li className="text-[#929292]">
-        <NavLink>Home</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-[#929292]" : "text-black"
+          }
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink>Pages</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-[#929292]" : "text-black"
+          }
+        >
+          Dashboard
+        </NavLink>
       </li>
       <li>
-        <NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-[#929292]" : "text-black"
+          }
+        >
           Cart{" "}
           <span className="text-[#929292] inline-flex items-center">
             (<FaDollarSign className="text-xs" />
-            <span>0</span>)
+            <span>0</span> )
           </span>
         </NavLink>
       </li>
       <li>
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="rounded-full">
-            <img
-              className="w-[50px] h-[50px]"
-              src="https://i.ibb.co.com/yBr5F0C/profile-picture-portrait.png"
-              alt=""
-            />
+            {user?.photoURL ? (
+              <img
+                className="w-[50px] h-[50px] rounded-[100%]"
+                src={user?.photoURL}
+                alt=""
+              />
+            ) : (
+              <img
+                className="w-[50px] h-[50px] rounded-[100%]"
+                src="https://i.ibb.co.com/yBr5F0C/profile-picture-portrait.png"
+                alt=""
+              />
+            )}
           </div>
           <ul
             tabIndex={0}
@@ -87,19 +112,16 @@ const NavBar = () => {
         <title>Login Page</title>
       </Helmet>
       <Headroom>
-        <div className="navbar bg-white w-full">
+        <div className="navbar lg:bg-transparent bg-white w-full flex justify-between items-center">
           <div className="lg:navbar-start mt-[30px]">
-            <div className="drawer lg:hidden">
+            <div className="drawer lg:hidden w-5">
               <input
                 id="my-drawer-2"
                 type="checkbox"
                 className="drawer-toggle"
               />
-              <div className="drawer-content flex flex-col items-center justify-center">
-                <label
-                  htmlFor="my-drawer-2"
-                  className="drawer-button lg:hidden"
-                >
+              <div className=" flex flex-col items-center justify-center">
+                <label htmlFor="my-drawer-2" className="lg:hidden">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -122,20 +144,29 @@ const NavBar = () => {
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className=" bg-white text-base-content min-h-full w-80 p-4">
+                <ul className="bg-white text-base-content min-h-full w-80 p-4 pl-10 pt-10">
                   {mobileLinks}
                 </ul>
               </div>
             </div>
-            <Link to={"/"} className="text-2xl font-bold ml-6">
+            <Link to={"/"} className="text-2xl font-bold ml-6 lg:-mt-6">
               <span className="mr-2">P I X E L </span>
               <span>P E R F E C T</span>
             </Link>
           </div>
-          <div className="navbar-end hidden lg:flex">
-            <ul className="menu-horizontal mr-6 gap-12 font-semibold items-center">
-              {Links}
-            </ul>
+          <div className="lg:navbar-end">
+            <div className="hidden lg:flex">
+              <ul className="menu-horizontal mr-6 gap-12 font-semibold items-center">
+                {Links}
+              </ul>
+            </div>
+            <div className="lg:hidden mt-5">
+              <img
+                className="w-[60px] h-[60px]"
+                src="https://i.ibb.co.com/yBr5F0C/profile-picture-portrait.png"
+                alt=""
+              />
+            </div>
           </div>
         </div>
       </Headroom>

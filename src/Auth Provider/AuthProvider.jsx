@@ -10,6 +10,7 @@ import {
   setPersistence,
   browserSessionPersistence,
   browserLocalPersistence,
+  updateProfile,
 } from "firebase/auth";
 import auth from "../Firebase/firebase.config";
 import { useEffect, useState } from "react";
@@ -28,6 +29,13 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, pass);
   };
 
+  const updateUser = (displayName, PhotoURL) => {
+    return updateProfile(auth.currentUser, {
+      displayName: displayName,
+      photoURL: PhotoURL || null,
+    });
+  };
+
   const signInWithPass = (email, pass, stayLogIn) => {
     setPersistence(
       auth,
@@ -44,6 +52,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     createAccount,
+    updateUser,
     signInWithGoogle,
     signInWithPass,
     logOut,
@@ -53,12 +62,13 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      console.log(user);
     });
 
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [user]);
   return (
     <div>
       <AuthContext.Provider value={AuthInfo}>{children}</AuthContext.Provider>

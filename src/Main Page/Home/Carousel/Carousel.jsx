@@ -33,6 +33,7 @@ const Carousel = () => {
         }}
         modules={[FreeMode, Pagination]}
         className="mySwiper w-[1330px] h-[75px]"
+        style={{ zIndex: 0 }}
       >
         <SwiperSlide>
           <div className="customTransition overflow-hidden min-w-fit relative flex justify-center lg:justify-start">
