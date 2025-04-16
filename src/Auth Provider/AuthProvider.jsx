@@ -22,10 +22,12 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
   const createAccount = (email, pass) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, pass);
   };
 
@@ -37,6 +39,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const signInWithPass = (email, pass, stayLogIn) => {
+    setLoading(true);
     setPersistence(
       auth,
       stayLogIn ? browserLocalPersistence : browserSessionPersistence
@@ -45,6 +48,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const signInWithGoogle = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
@@ -62,7 +66,6 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
-      console.log(user);
     });
 
     return () => {

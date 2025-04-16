@@ -6,9 +6,11 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { MdOutlineMailLock } from "react-icons/md";
 import { AuthContext } from "../../Auth Provider/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/Axios/useAxiosPublic";
 
 const Login = () => {
   const { signInWithGoogle, signInWithPass } = useContext(AuthContext);
+  const axios = useAxiosPublic();
 
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState(false);
@@ -35,13 +37,18 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    signInWithGoogle()
-      .then(() => {
-        return navigate(location.state ? location.state : "/");
-      })
-      .catch(() => {
-        setLoad(false);
-      });
+    signInWithGoogle().then((res) => {
+      axios
+        .post("/users", {
+          email: res.user?.email,
+          name: res.user?.displayName,
+          photoURL: res.user?.photoURL,
+          userRoll: "buyer",
+        })
+        .then(() => {
+          navigate(location.state ? location.state : "/");
+        });
+    });
   };
 
   return (

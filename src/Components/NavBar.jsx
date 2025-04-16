@@ -28,6 +28,7 @@ const NavBar = () => {
       </li>
       <li>
         <NavLink
+          to={"/dashboard/user-profile"}
           className={({ isActive }) =>
             isActive ? "text-[#929292]" : "text-black"
           }
@@ -54,7 +55,7 @@ const NavBar = () => {
             {user?.photoURL ? (
               <img
                 className="w-[50px] h-[50px] rounded-[100%]"
-                src={user?.photoURL}
+                src={user.photoURL}
                 alt=""
               />
             ) : (
@@ -103,6 +104,9 @@ const NavBar = () => {
             <Link to={"/login-page"}>Login</Link>
           </>
         )}
+      </li>
+      <li>
+        <Link to={"/dashboard/user-profile"}>Dashboard</Link>
       </li>
     </>
   );

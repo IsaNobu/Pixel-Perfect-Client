@@ -109,18 +109,18 @@ const SignUp = () => {
   };
 
   const handleGoogleLogin = () => {
-    signInWithGoogle().then((res) => {
-      axios
-        .post("/users", {
+    signInWithGoogle()
+      .then((res) => {
+        axios.post("/users", {
           email: res.user?.email,
           name: res.user?.displayName,
           photoURL: res.user?.photoURL,
           userRoll: "buyer",
-        })
-        .then(() => {
-          navigate(location.state ? location.state : "/");
         });
-    });
+      })
+      .then(() => {
+        navigate(location.state ? location.state : "/");
+      });
   };
   return (
     <div className="flex lg:flex-row-reverse lg:items-start items-center flex-col justify-center gap-12 lg:mt-24">
